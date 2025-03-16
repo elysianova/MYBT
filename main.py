@@ -104,7 +104,7 @@ def handle_message(update, context):
         update.message.reply_text("Please send a valid YouTube link.")
 
 def main():
-    TOKEN = os.getenv("BOT_TOKEN")
+    TOKEN = os.getenv("8187797805:AAH_ZvZcd_uqFBxQgCXD6XfWHwoAJjcehXc")
     if not TOKEN:
         logger.error("BOT_TOKEN environment variable not set")
         return
