@@ -3,30 +3,13 @@ import shutil
 import logging
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 import yt_dlp
-from flask import Flask
-from threading import Thread
 
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
-logger = logging.getLogger(__name__)
-
-# --- Flask Uptime Monitor Setup ---
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Bot is running!"
-
-def run():
-    app.run(host='0.0.0.0', port=8080)
-
-def keep_alive():
-    t = Thread(target=run)
-    t.start()
-# --- End of Uptime Monitor Setup ---
+logger = logging.getLogger(name)
 
 def start(update, context):
     update.message.reply_text(
@@ -104,12 +87,10 @@ def handle_message(update, context):
         update.message.reply_text("Please send a valid YouTube link.")
 
 def main():
-    TOKEN = os.getenv("8187797805:AAH_ZvZcd_uqFBxQgCXD6XfWHwoAJjcehXc")
+    TOKEN = "8187797805:AAH_ZvZcd_uqFBxQgCXD6XfWHwoAJjcehXc"  # Replace with your bot token
     if not TOKEN:
         logger.error("BOT_TOKEN environment variable not set")
         return
-
-    keep_alive()
 
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
@@ -120,5 +101,5 @@ def main():
     updater.start_polling()
     updater.idle()
 
-if __name__ == '__main__':
+if name == 'main':
     main()
